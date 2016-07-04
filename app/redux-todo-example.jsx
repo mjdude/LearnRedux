@@ -1,7 +1,13 @@
 var redux = require('redux');
 
-var reducer = (state = { searchText: '', showCompleted: false, todos: [] } , action) => {
+console.log('Starting todo redux example');
 
+var stateDefault = {
+  searchText: '',
+  showCompleted: false,
+  todos: [],
+};
+var reducer = (state = stateDefault , action) => {
   return state;
 }
 var store = redux.createStore(reducer);
