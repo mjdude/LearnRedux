@@ -15,7 +15,18 @@ console.log('starting redux example');
       return state;
   }
  };
-var store = redux.createStore(reducer);
+var store = redux.createStore(reducer, redux.compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
+
+var unsubscribe = store.subscribe(() => {
+  var state = store.getState();
+
+  console.log('name is', state.name);
+  document.getElementById('app').innerHTML = state.name;
+});
+
+// unsubscribe();
 
 var currentState = store.getState();
 
@@ -26,4 +37,9 @@ store.dispatch({
   name: 'Mo',
 });
 
-console.log('Name should be Mo', store.getState());
+
+
+store.dispatch({
+  type: 'CHANGE_NAME',
+  name: 'Emily',
+});
